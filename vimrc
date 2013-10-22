@@ -69,6 +69,13 @@ set autochdir
 set shortmess=I
 set showcmd
 
+if has('gui_running')
+  set antialias
+  set guifont=Liberation\ Mono\ for\ PowerLine\ 11
+  set guioptions=aci
+  set noeb vb t_vb=
+endif
+
 "--------- Custom mappings -----------"
 nnoremap <silent> <C-j> O<Esc>j
 nnoremap <silent> <M-j> ddp
@@ -89,7 +96,7 @@ nnoremap <silent> <C-N> :NERDTreeToggle<cr>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 set laststatus=2
-"let g:airline_theme='powerlineish'
+let g:airline_theme='powerlineish'
 
 " Paredit
 let g:paredit_electric_return=0
