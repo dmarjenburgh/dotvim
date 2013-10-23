@@ -58,7 +58,7 @@ let mapleader = ','
 syntax enable
 
 set background=dark
-colorscheme solarized
+colorscheme Tomorrow-Night
 
 set number
 set cursorline
@@ -91,8 +91,6 @@ set wildmode=list:longest
 
 set scrolloff=8 sidescrolloff=5
 set complete-=i
-set noeb vb
-set t_vb=
 
 set history=1000
 
@@ -102,6 +100,9 @@ if has('gui_running')
   set guioptions=aci
 endif
 
+set noeb vb
+autocmd GUIEnter * set t_vb=
+
 "-------------------------------------- }}}
 
 "--------- Custom mappings ----------- }}}
@@ -109,10 +110,10 @@ nnoremap Y y$
 nnoremap <silent> <C-j> O<Esc>j
 nnoremap <silent> <M-j> ddp
 nnoremap <silent> <M-k> ddkP
-nnoremap <silent> <Leader>ev :vs $MYVIMRC<cr>
-nnoremap <silent> <Leader>sv :so $MYVIMRC<cr>
+nnoremap <silent> <Leader>ev :vs $MYVIMRC<CR>
+nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 nnoremap ; :
-nnoremap <silent> <C-L> :set nohlsearch<cr>
+nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 "-------------------------------------- }}}
 
 "---------- Custom functions ---------" {{{
@@ -122,13 +123,18 @@ nnoremap <silent> <C-L> :set nohlsearch<cr>
 
 " NERDTree
 let NERDTreeShowBookmarks = 1
-nnoremap <silent> <C-N> :NERDTreeToggle<cr>
+nnoremap <silent> <C-N> :NERDTreeToggle<CR>
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+if has('gui_running')
+  let g:airline_powerline_fonts = 1
+else
+  let g:airline_left_sep = '▶'
+  let g:airline_right_sep = '◀'
+  let g:airline_theme='powerlineish'
+endif
 set laststatus=2
-" let g:airline_theme='powerlineish'
 
 " Paredit
 let g:paredit_electric_return=0
