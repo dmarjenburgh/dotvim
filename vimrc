@@ -29,6 +29,9 @@ Bundle 'bling/vim-airline'
 
 Bundle 'godlygeek/tabular'
 Bundle 'atsepkov/vim-tabularity'
+
+Bundle 'mattn/emmet-vim'
+
 " vim-scripts repos
 
 " non github repos
@@ -96,7 +99,11 @@ set history=1000
 
 if has('gui_running')
   set antialias
-  set guifont=Liberation\ Mono\ for\ PowerLine\ 11
+  if has('gui_gtk2')
+    set guifont=Liberation\ Mono\ for\ PowerLine\ 11
+  else
+    set guifont=Liberation_MONO_for_Powerline:h11
+  endif
   set guioptions=aci
 endif
 
@@ -117,6 +124,14 @@ nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 "-------------------------------------- }}}
 
 "---------- Custom functions ---------" {{{
+function! ReindentTopLevelForm()
+  let l:line = line('.')
+  let l:column = col('.')
+  normal [[v%=
+  call cursor(l:line, l:column)
+endfunction
+
+autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopLevelForm()<cr>
 "-------------------------------------- }}}
 
 "---------- Plugin options -----------"
@@ -132,11 +147,18 @@ if has('gui_running')
 else
   let g:airline_left_sep = '▶'
   let g:airline_right_sep = '◀'
-  let g:airline_theme='powerlineish'
+  let g:airline_theme ='powerlineish'
 endif
 set laststatus=2
 
 " Paredit
-let g:paredit_electric_return=0
+let g:paredit_electric_return = 0
+
+" Emmet
+let g:user_emmet_mode = 'iv'
+let g:user_emmet_install_global = 0
+let g:user_emmet_leader_key = '<Tab>'
+
+autocmd FileType html,xhtml,css,mustache EmmetInstall
 
 "-------------------------------------- }}}
