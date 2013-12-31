@@ -18,6 +18,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
+Bundle 'tpope/vim-ragtag'
 Bundle 'guns/vim-clojure-static'
 Bundle 'altercation/vim-colors-solarized'
 
@@ -109,7 +110,7 @@ endif
 
 set noeb vb
 autocmd GUIEnter * set t_vb=
-
+autocmd BufWritePre * call StripTrailingWhitespace()
 "-------------------------------------- }}}
 
 "--------- Custom mappings ----------- }}}
@@ -129,6 +130,15 @@ function! ReindentTopLevelForm()
   let l:column = col('.')
   normal [[v%=
   call cursor(l:line, l:column)
+endfunction
+
+function! StripTrailingWhitespace()
+  if !&binary && &filetype != 'diff'
+    let l:line = line('.')
+    let l:column = col('.')
+    %s/\s\+$//e
+    call cursor(l:line, l:column)
+  endif
 endfunction
 
 autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopLevelForm()<cr>
@@ -152,13 +162,13 @@ endif
 set laststatus=2
 
 " Paredit
-let g:paredit_electric_return = 0
+" let g:paredit_electric_return = 0
 
 " Emmet
 let g:user_emmet_mode = 'iv'
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key = '<Tab>'
 
-autocmd FileType html,xhtml,css,mustache EmmetInstall
+autocmd FileType html,xhtml,css,mustache,eruby EmmetInstall
 
 "-------------------------------------- }}}
