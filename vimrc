@@ -29,7 +29,14 @@ Bundle 'bling/vim-airline'
 
 Bundle 'godlygeek/tabular'
 Bundle 'atsepkov/vim-tabularity'
+Bundle "lepture/vim-jinja"
+
+Bundle "mattn/emmet-vim"
+Bundle 'suan/vim-instant-markdown'
 " vim-scripts repos
+Bundle 'vim-vagrant'
+Bundle 'Puppet-Syntax-Highlighting'
+Bundle 'JavaScript-Indent'
 
 " non github repos
 
@@ -96,12 +103,13 @@ set history=1000
 
 if has('gui_running')
   set antialias
-  set guifont=Liberation\ Mono\ for\ PowerLine\ 11
+  set guifont=Liberation\ Mono\ for\ PowerLine\ 10
   set guioptions=aci
 endif
 
 set noeb vb
 autocmd GUIEnter * set t_vb=
+autocmd BufWritePre *.{clj,php,java,js} call StripTrailingWhiteSpace()
 
 "-------------------------------------- }}}
 
@@ -114,9 +122,18 @@ nnoremap <silent> <Leader>ev :vs $MYVIMRC<CR>
 nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 nnoremap ; :
 nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+nnoremap <C-Right> :bnext<CR>
+nnoremap <C-Left> :bprevious<CR>
 "-------------------------------------- }}}
 
 "---------- Custom functions ---------" {{{
+function! StripTrailingWhiteSpace()
+if !&binary && &filetype != 'diff'
+  let l:winview = winsaveview()
+  silent! %s/\s\+$
+  call winrestview(l:winview)
+endif
+endfunction
 "-------------------------------------- }}}
 
 "---------- Plugin options -----------"
@@ -138,5 +155,14 @@ set laststatus=2
 
 " Paredit
 let g:paredit_electric_return=0
+
+" Emmet
+let g:user_emmet_install_global = 0
+let g:user_emmet_leader_key = "<Tab>"
+let g:user_emmet_mode = 'iv'
+autocmd FileType html,xhtml,mustache,twig,css EmmetInstall
+
+" Vim-Clojure Static
+let g:clojure_align_multiline_strings = 1
 
 "-------------------------------------- }}}
