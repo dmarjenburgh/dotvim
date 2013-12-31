@@ -18,6 +18,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
+Bundle 'tpope/vim-ragtag'
 Bundle 'guns/vim-clojure-static'
 Bundle 'altercation/vim-colors-solarized'
 
@@ -30,9 +31,9 @@ Bundle 'bling/vim-airline'
 Bundle 'godlygeek/tabular'
 Bundle 'atsepkov/vim-tabularity'
 Bundle "lepture/vim-jinja"
-
 Bundle "mattn/emmet-vim"
 Bundle 'suan/vim-instant-markdown'
+
 " vim-scripts repos
 Bundle 'vim-vagrant'
 Bundle 'Puppet-Syntax-Highlighting'
@@ -103,14 +104,18 @@ set history=1000
 
 if has('gui_running')
   set antialias
-  set guifont=Liberation\ Mono\ for\ PowerLine\ 10
+  if has('gui_gtk2')
+    set guifont=Liberation\ Mono\ for\ PowerLine\ 11
+  else
+    set guifont=Liberation_MONO_for_Powerline:h11
+  endif
   set guioptions=aci
 endif
 
 set noeb vb
 autocmd GUIEnter * set t_vb=
-autocmd BufWritePre *.{clj,php,java,js} call StripTrailingWhiteSpace()
 
+autocmd BufWritePre *.{clj,php,java,js} call StripTrailingWhiteSpace()
 "-------------------------------------- }}}
 
 "--------- Custom mappings ----------- }}}
@@ -127,13 +132,24 @@ nnoremap <C-Left> :bprevious<CR>
 "-------------------------------------- }}}
 
 "---------- Custom functions ---------" {{{
-function! StripTrailingWhiteSpace()
-if !&binary && &filetype != 'diff'
-  let l:winview = winsaveview()
-  silent! %s/\s\+$
-  call winrestview(l:winview)
-endif
+
+function! ReindentTopLevelForm()
+  let l:line = line('.')
+  let l:column = col('.')
+  normal [[v%=
+  call cursor(l:line, l:column)
 endfunction
+
+function! StripTrailingWhitespace()
+  if !&binary && &filetype != 'diff'
+    let l:line = line('.')
+    let l:column = col('.')
+    %s/\s\+$//e
+    call cursor(l:line, l:column)
+  endif
+endfunction
+
+autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopLevelForm()<cr>
 "-------------------------------------- }}}
 
 "---------- Plugin options -----------"
@@ -149,12 +165,19 @@ if has('gui_running')
 else
   let g:airline_left_sep = '▶'
   let g:airline_right_sep = '◀'
-  let g:airline_theme='powerlineish'
+  let g:airline_theme ='powerlineish'
 endif
 set laststatus=2
 
 " Paredit
-let g:paredit_electric_return=0
+" let g:paredit_electric_return = 0
+
+" Emmet
+let g:user_emmet_mode = 'iv'
+let g:user_emmet_install_global = 0
+let g:user_emmet_leader_key = '<Tab>'
+
+autocmd FileType html,xhtml,css,mustache,eruby EmmetInstall
 
 " Emmet
 let g:user_emmet_install_global = 0
