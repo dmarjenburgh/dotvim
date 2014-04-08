@@ -40,6 +40,7 @@ Bundle 'Puppet-Syntax-Highlighting'
 Bundle 'JavaScript-Indent'
 Bundle 'VisIncr'
 Bundle 'paredit.vim'
+Bundle 'grails-vim'
 
 " non github repos
 
@@ -105,9 +106,9 @@ set history=1000
 if has('gui_running')
   set antialias
   if has('gui_gtk2')
-    set guifont=Liberation\ Mono\ for\ PowerLine\ 11
+    set guifont=Liberation\ Mono\ for\ PowerLine\ 15
   else
-    set guifont=Liberation_MONO_for_Powerline:h11
+    set guifont=Liberation_MONO_for_Powerline:h15
   endif
   set guioptions=aci
 endif
