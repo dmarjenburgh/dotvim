@@ -38,13 +38,13 @@ Bundle 'rodjek/vim-puppet'
 
 " vim-scripts repos
 Bundle 'vim-vagrant'
+Bundle 'Puppet-Syntax-Highlighting'
 Bundle 'JavaScript-Indent'
+Bundle 'VisIncr'
+Bundle 'paredit.vim'
+Bundle 'grails-vim'
 
 " non github repos
-
-" git repos on your local machine (ie. when working on your own plugin)
-Bundle 'file:///home/daniel/github/forks/paredit.vim'
-Bundle 'file:///home/daniel/github/local/visincr'
 
 " ...
 
@@ -106,9 +106,9 @@ set history=1000
 if has('gui_running')
   set antialias
   if has('gui_gtk2')
-    set guifont=Liberation\ Mono\ for\ PowerLine\ 11
+    set guifont=Liberation\ Mono\ for\ PowerLine\ 15
   else
-    set guifont=Liberation_MONO_for_Powerline:h11
+    set guifont=Liberation_MONO_for_Powerline:h15
   endif
   set guioptions=aci
 endif
@@ -155,6 +155,10 @@ autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopL
 
 "---------- Plugin options -----------"
 
+" Vim Clojure Static
+let g:clojure_fuzzy_indent = 1
+let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', 'defproject', 'facts\?']
+
 " NERDTree
 let NERDTreeShowBookmarks = 1
 nnoremap <silent> <C-N> :NERDTreeToggle<CR>
@@ -188,13 +192,5 @@ autocmd FileType html,xhtml,mustache,twig,css EmmetInstall
 
 " Vim-Clojure Static
 let g:clojure_align_multiline_strings = 1
-let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'conde', 'fresh', '^facts\?']
-
-" Vim-jinja
-autocmd BufNewFile,BufRead *.twig silent set ft=jinja
-
-" Vim-fireplace
-autocmd FileType clojure nmap c<CR> (cp%
 
 "-------------------------------------- }}}
