@@ -34,9 +34,10 @@ Bundle "lepture/vim-jinja"
 Bundle "mattn/emmet-vim"
 Bundle 'suan/vim-instant-markdown'
 
+Bundle 'rodjek/vim-puppet'
+
 " vim-scripts repos
 Bundle 'vim-vagrant'
-Bundle 'Puppet-Syntax-Highlighting'
 Bundle 'JavaScript-Indent'
 
 " non github repos
@@ -115,7 +116,7 @@ endif
 set noeb vb
 autocmd GUIEnter * set t_vb=
 
-autocmd BufWritePre *.{clj,php,java,js} call StripTrailingWhiteSpace()
+autocmd BufWritePre *.{clj,php,java,js} call StripTrailingWhitespace()
 "-------------------------------------- }}}
 
 "--------- Custom mappings ----------- }}}
@@ -187,5 +188,13 @@ autocmd FileType html,xhtml,mustache,twig,css EmmetInstall
 
 " Vim-Clojure Static
 let g:clojure_align_multiline_strings = 1
+let g:clojure_fuzzy_indent = 1
+let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'conde', 'fresh', '^facts\?']
+
+" Vim-jinja
+autocmd BufNewFile,BufRead *.twig silent set ft=jinja
+
+" Vim-fireplace
+autocmd FileType clojure nmap c<CR> (cp%
 
 "-------------------------------------- }}}
