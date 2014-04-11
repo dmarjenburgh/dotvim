@@ -105,10 +105,16 @@ set history=1000
 
 if has('gui_running')
   set antialias
-  if has('gui_gtk2')
-    set guifont=Liberation\ Mono\ for\ PowerLine\ 15
+  if has('mac')
+    if system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 4) > 900
+      set guifont=Liberation_MONO_for_Powerline:h18
+    else
+      set guifont=Liberation_MONO_for_Powerline:h13
+    endif
+  elseif has('gui_gtk2')
+    set guifont=Liberation\ Mono\ for\ PowerLine\ 13
   else
-    set guifont=Liberation_MONO_for_Powerline:h15
+    set guifont=Liberation_MONO_for_Powerline:h13
   endif
   set guioptions=aci
 endif
