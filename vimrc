@@ -16,8 +16,9 @@ Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fireplace'
-Bundle 'tpope/vim-classpath'
+Bundle 'tpope/vim-leiningen'
 Bundle 'tpope/vim-ragtag'
 Bundle 'guns/vim-clojure-static'
 Bundle 'altercation/vim-colors-solarized'
@@ -106,11 +107,7 @@ set history=1000
 if has('gui_running')
   set antialias
   if has('mac')
-    if system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 4) > 900
-      set guifont=Liberation_MONO_for_Powerline:h18
-    else
-      set guifont=Liberation_MONO_for_Powerline:h13
-    endif
+    set guifont=Liberation_MONO_for_Powerline:h13
   elseif has('gui_gtk2')
     set guifont=Liberation\ Mono\ for\ PowerLine\ 13
   else
@@ -163,7 +160,7 @@ autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopL
 
 " Vim Clojure Static
 let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', 'defproject', 'facts\?']
+let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', 'def\*', 'facts\?', 'describe', 'it', 'go-\?']
 
 " NERDTree
 let NERDTreeShowBookmarks = 1
