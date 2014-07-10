@@ -106,7 +106,7 @@ set history=1000
 if has('gui_running')
   set antialias
   if has('mac')
-    if system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 4) > 900
+    if system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 4") > 900
       set guifont=Liberation_MONO_for_Powerline:h18
     else
       set guifont=Liberation_MONO_for_Powerline:h13
@@ -163,7 +163,7 @@ autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopL
 
 " Vim Clojure Static
 let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', 'defproject', 'facts\?']
+let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', '^def', '^with', 'facts\?', 'go-\?']
 
 " NERDTree
 let NERDTreeShowBookmarks = 1
