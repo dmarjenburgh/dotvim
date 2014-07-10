@@ -16,8 +16,9 @@ Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fireplace'
-Bundle 'tpope/vim-classpath'
+Bundle 'tpope/vim-leiningen'
 Bundle 'tpope/vim-ragtag'
 Bundle 'guns/vim-clojure-static'
 Bundle 'altercation/vim-colors-solarized'
@@ -163,7 +164,7 @@ autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopL
 
 " Vim Clojure Static
 let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', '^def', '^with', 'facts\?', 'go-\?']
+let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', 'def\*', 'facts\?', 'describe', 'it', 'go-\?']
 
 " NERDTree
 let NERDTreeShowBookmarks = 1
