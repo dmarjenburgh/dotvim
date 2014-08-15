@@ -18,10 +18,13 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-fireplace'
+Bundle 'tpope/vim-projectionist'
 Bundle 'tpope/vim-leiningen'
 Bundle 'tpope/vim-ragtag'
 Bundle 'guns/vim-clojure-static'
 Bundle 'altercation/vim-colors-solarized'
+
+Bundle 'fatih/vim-go'
 
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
@@ -29,6 +32,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'bling/vim-airline'
 
+Bundle 'kien/ctrlp.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'atsepkov/vim-tabularity'
 Bundle "lepture/vim-jinja"
@@ -164,7 +168,7 @@ autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopL
 
 " Vim Clojure Static
 let g:clojure_fuzzy_indent = 1
-let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', 'def\*', 'facts\?', 'describe', 'it', 'go-\?']
+let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', 'def\*', 'facts\?', 'describe', 'it', 'go-\?', '^send']
 
 " NERDTree
 let NERDTreeShowBookmarks = 1
@@ -199,5 +203,9 @@ autocmd FileType html,xhtml,mustache,twig,css EmmetInstall
 
 " Vim-Clojure Static
 let g:clojure_align_multiline_strings = 1
+
+" CtrlP
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_root_markers = ['pom.xml', 'project.clj']
 
 "-------------------------------------- }}}
