@@ -1,4 +1,4 @@
-"--------- Vundle bundles ----------- }}}
+"--------- Vundle bundles -----------
 
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -10,9 +10,7 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-" My Bundles here:
-"
-" original repos on github
+" Original repos on github
 
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -23,22 +21,18 @@ Bundle 'tpope/vim-leiningen'
 Bundle 'tpope/vim-ragtag'
 Bundle 'guns/vim-clojure-static'
 Bundle 'altercation/vim-colors-solarized'
-
 Bundle 'fatih/vim-go'
-
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'bling/vim-airline'
-
 Bundle 'kien/ctrlp.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'atsepkov/vim-tabularity'
 Bundle "lepture/vim-jinja"
 Bundle "mattn/emmet-vim"
 Bundle 'suan/vim-instant-markdown'
-
 Bundle 'rodjek/vim-puppet'
 
 " vim-scripts repos
@@ -48,10 +42,6 @@ Bundle 'JavaScript-Indent'
 Bundle 'VisIncr'
 Bundle 'paredit.vim'
 Bundle 'grails-vim'
-
-" non github repos
-
-" ...
 
 filetype plugin indent on     " required!
 "
@@ -64,9 +54,7 @@ filetype plugin indent on     " required!
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
-"-------------------------------------- }}}
-
-"--------- Options, etc ----------- }}}
+"--------- Options, etc -----------
 let mapleader = ','
 
 syntax enable
@@ -128,23 +116,20 @@ set noeb vb
 autocmd GUIEnter * set t_vb=
 
 autocmd BufWritePre *.{clj,php,java,js} call StripTrailingWhitespace()
-"-------------------------------------- }}}
 
-"--------- Custom mappings ----------- }}}
+"--------- Custom mappings -----------
 nnoremap Y y$
 nnoremap <silent> <C-j> O<Esc>j
 nnoremap <silent> <M-j> ddp
 nnoremap <silent> <M-k> ddkP
-nnoremap <silent> <Leader>ev :vs $MYVIMRC<CR>
+nnoremap <silent> <Leader>ev :tabe $MYVIMRC<CR>
 nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 nnoremap ; :
 nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 nnoremap <C-Right> :bnext<CR>
 nnoremap <C-Left> :bprevious<CR>
-"-------------------------------------- }}}
 
-"---------- Custom functions ---------" {{{
-
+"---------- Custom functions ---------"
 function! ReindentTopLevelForm()
   let l:line = line('.')
   let l:column = col('.')
@@ -162,13 +147,13 @@ function! StripTrailingWhitespace()
 endfunction
 
 autocmd FileType clojure nnoremap <silent> <buffer> <Leader>= :call ReindentTopLevelForm()<cr>
-"-------------------------------------- }}}
 
 "---------- Plugin options -----------"
 
 " Vim Clojure Static
 let g:clojure_fuzzy_indent = 1
 let g:clojure_fuzzy_indent_patterns = ['run\*\?\>', 'fresh', 'conde', 'def\*', 'facts\?', 'describe', 'it', 'go-\?', '^send']
+let g:clojure_align_multiline_strings = 1
 
 " NERDTree
 let NERDTreeShowBookmarks = 1
@@ -193,19 +178,8 @@ let g:user_emmet_mode = 'iv'
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key = '<Tab>'
 
-autocmd FileType html,xhtml,css,mustache,eruby EmmetInstall
-
-" Emmet
-let g:user_emmet_install_global = 0
-let g:user_emmet_leader_key = "<Tab>"
-let g:user_emmet_mode = 'iv'
-autocmd FileType html,xhtml,mustache,twig,css EmmetInstall
-
-" Vim-Clojure Static
-let g:clojure_align_multiline_strings = 1
+autocmd FileType html,xhtml,css,mustache,twig,eruby EmmetInstall
 
 " CtrlP
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['pom.xml', 'project.clj']
-
-"-------------------------------------- }}}
